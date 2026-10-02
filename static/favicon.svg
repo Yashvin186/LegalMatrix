@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Shield Base -->
+  <path d="M16 2 L5 6 V15 C5 22.5 9.8 28.5 16 30 C22.2 28.5 27 22.5 27 15 V6 Z" fill="url(#shieldGrad)"/>
+  <!-- Inner Border -->
+  <path d="M16 3.5 L6.5 7 V15 C6.5 21.6 10.6 27 16 28.4 C21.4 27 25.5 21.6 25.5 15 V7 Z" fill="none" stroke="#60a5fa" stroke-width="0.8" opacity="0.6"/>
+  <!-- Central Balance Scale (Statutory Metrology Emblem) -->
+  <!-- Central Pillar -->
+  <line x1="16" y1="9" x2="16" y2="22" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round"/>
+  <!-- Beam -->
+  <line x1="10" y1="12" x2="22" y2="12" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Center Cap -->
+  <circle cx="16" cy="9.5" r="1.2" fill="#ffffff"/>
+  <!-- Left Pan Strings & Pan -->
+  <line x1="10" y1="12" x2="8" y2="17" stroke="#93c5fd" stroke-width="1"/>
+  <line x1="10" y1="12" x2="12" y2="17" stroke="#93c5fd" stroke-width="1"/>
+  <path d="M7 17 Q10 19 13 17 Z" fill="#ffffff"/>
+  <!-- Right Pan Strings & Pan -->
+  <line x1="22" y1="12" x2="20" y2="17" stroke="#93c5fd" stroke-width="1"/>
+  <line x1="22" y1="12" x2="24" y2="17" stroke="#93c5fd" stroke-width="1"/>
+  <path d="M19 17 Q22 19 25 17 Z" fill="#ffffff"/>
+  <!-- Base Pedestal -->
+  <path d="M13 22 L19 22" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"/>
+</svg>

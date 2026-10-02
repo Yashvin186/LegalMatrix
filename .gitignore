@@ -1,0 +1,55 @@
+# Python & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv/
+
+# Environment Variables & Sensitive Credentials
+.env
+*.env
+.env.*
+!.env.example
+apikey.txt
+*api_key*
+*.key
+*.pem
+*.secret
+
+# Test & Coverage Caches
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Uploads & Generated Inspection Artifacts (Keep folders via .gitkeep)
+uploads/*
+!uploads/.gitkeep
+generated_reports/*
+!generated_reports/.gitkeep
+
+# System & OS Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+desktop.ini
+
+# IDE & Editor Configurations
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Large Raw Reference Files
+rules.pdf
+
+# Logs
+*.log

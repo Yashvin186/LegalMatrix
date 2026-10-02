@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LegalMetriX: Packaged Commodity Compliance & Authenticity Verification System</title>
+  <meta name="description"
+    content="LegalMetriX: Packaged commodity Legal Metrology compliance inspection and Authenticity Risk Verification system.">
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <!-- Application Header -->
+    <header class="app-header">
+      <div class="brand-wrapper">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">LegalMetriX</h1>
+          <p class="brand-tagline">Packaged Commodity Compliance & Authenticity Risk Inspection System</p>
+        </div>
+      </div>
+      <div class="header-badges">
+        <span class="badge badge-official">Legal Metrology Rules 2011</span>
+        <span class="badge badge-sih">Automated Inspection System</span>
+      </div>
+    </header>
+
+    <!-- Official Regulatory Reference Notice -->
+    <div class="regulatory-banner">
+      <div>
+        <strong>Primary Regulatory Baseline:</strong> The Legal Metrology (Packaged Commodities) Rules, 2011 (Dept. of
+        Consumer Affairs, Govt. of India).
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <button type="button" class="btn-rulebook-nav" id="openRulebookBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          LMR 2011 Rulebook Navigator
+        </button>
+        <a href="https://consumeraffairs.gov.in/pages/legal-metrology-act" target="_blank" rel="noopener noreferrer"
+          class="banner-link">
+          Official Act & Rules &rarr;
+        </a>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         SCREEN 1: UPLOAD & INPUT INTERFACE
+         ========================================================================= -->
+    <main id="uploadSection">
+      <section class="upload-card">
+        <div class="section-header">
+          <h2 class="section-title">Upload Packaged Commodity Label</h2>
+          <p class="section-subtitle">Upload clear packaging photographs or label panels (JPG, JPEG, PNG, WEBP) to
+            perform Legal Metrology compliance screening, Authenticity Risk verification, and generate official
+            preliminary inspection reports.</p>
+        </div>
+
+        <!-- Scan Mode Switcher -->
+        <div class="mode-switcher-container">
+          <div class="mode-switcher" role="tablist">
+            <button type="button" class="mode-tab active" id="modeSingleTab" data-mode="single">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              </svg>
+              Single-Panel Scan
+            </button>
+            <button type="button" class="mode-tab" id="modeDualTab" data-mode="dual">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="9" height="18" rx="2"></rect>
+                <rect x="13" y="3" width="9" height="18" rx="2"></rect>
+              </svg>
+              Dual-Panel (Front & Back)
+              <span class="mode-pill-badge">Mismatch Shield</span>
+            </button>
+          </div>
+          <div class="mode-help-text" id="modeHelpText">
+            Single-view capture for Principal Display Panel (PDP) or flat unfolded packaging.
+          </div>
+        </div>
+
+        <!-- Mode 1: Single Dropzone -->
+        <div id="singleUploadSection">
+          <div class="dropzone" id="dropzone">
+            <input type="file" id="fileInput" accept="image/jpeg,image/png,image/jpg,image/webp">
+            <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            <div class="dropzone-text">Drag & drop product image here, or browse from device</div>
+            <div class="dropzone-hint">Accepted formats: JPG, JPEG, PNG, WEBP (Max 15MB)</div>
+            <div class="dropzone-actions" style="margin-top: 14px;">
+              <button type="button" class="btn-camera-trigger" id="openCameraSingleBtn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                  <circle cx="12" cy="13" r="4"></circle>
+                </svg>
+                Open Live Camera Scanner
+              </button>
+            </div>
+          </div>
+
+          <!-- Single Image Preview Card -->
+          <div class="preview-container" id="previewContainer">
+            <div class="preview-content">
+              <img id="previewImg" class="preview-thumbnail" src="" alt="Selected Product Preview">
+              <div class="preview-details">
+                <div class="preview-filename" id="previewFilename">filename.jpg</div>
+                <div class="preview-meta" id="previewMeta">0.00 MB</div>
+              </div>
+              <button type="button" class="btn btn-secondary" id="clearBtn"
+                style="padding: 8px 16px; font-size: 0.85rem;">Remove</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mode 2: Dual Dropzones (Front & Back) -->
+        <div id="dualUploadSection" style="display: none;">
+          <div class="dual-shield-banner">
+            <div class="shield-icon-badge">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <div class="shield-text">
+              <strong>Automated Mismatch Prevention Gatekeeper Active</strong>
+              <p>LegalMetriX automatically verifies brand corroboration, product category (Food vs Cosmetic/Non-food), pack size consistency, and visual palette. Mismatched panels are rejected before inspection.</p>
+            </div>
+          </div>
+
+          <div class="dual-upload-grid">
+            <!-- Slot 1: Front Principal Display Panel (PDP) -->
+            <div class="dual-slot-card">
+              <div class="slot-header">
+                <span class="slot-badge slot-badge-front">Slot 1 &bull; Front PDP</span>
+                <span class="slot-rules-hint">Brand Name &bull; Product Identity &bull; Net Quantity</span>
+              </div>
+              <div class="dropzone slot-dropzone" id="frontDropzone">
+                <input type="file" id="fileInputFront" accept="image/jpeg,image/png,image/jpg,image/webp">
+                <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+                <div class="dropzone-text" style="font-size: 0.9rem;">Upload Front Display Panel (PDP)</div>
+                <div class="dropzone-hint">Shows brand name, product title & net quantity</div>
+                <div class="dropzone-actions" style="margin-top: 10px;">
+                  <button type="button" class="btn-camera-trigger" id="openCameraFrontBtn">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:4px;"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                    Live Camera (Front PDP)
+                  </button>
+                </div>
+              </div>
+              <div class="preview-container slot-preview" id="frontPreviewContainer">
+                <div class="preview-content">
+                  <img id="frontPreviewImg" class="preview-thumbnail" src="" alt="Front PDP Preview">
+                  <div class="preview-details">
+                    <div class="preview-filename" id="frontPreviewFilename">front.jpg</div>
+                    <div class="preview-meta" id="frontPreviewMeta">0.00 MB</div>
+                  </div>
+                  <button type="button" class="btn btn-secondary" id="frontClearBtn" style="padding: 6px 12px; font-size: 0.78rem;">Remove</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slot 2: Back Information Panel -->
+            <div class="dual-slot-card">
+              <div class="slot-header">
+                <span class="slot-badge slot-badge-back">Slot 2 &bull; Back Info Panel</span>
+                <span class="slot-rules-hint">MRP &bull; Mfg / Exp Date &bull; Ingredients &bull; FSSAI</span>
+              </div>
+              <div class="dropzone slot-dropzone" id="backDropzone">
+                <input type="file" id="fileInputBack" accept="image/jpeg,image/png,image/jpg,image/webp">
+                <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <div class="dropzone-text" style="font-size: 0.9rem;">Upload Back Information Panel</div>
+                <div class="dropzone-hint">Shows MRP, addresses, dates & nutritional table</div>
+                <div class="dropzone-actions" style="margin-top: 10px;">
+                  <button type="button" class="btn-camera-trigger" id="openCameraBackBtn">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:4px;"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                    Live Camera (Back Info)
+                  </button>
+                </div>
+              </div>
+              <div class="preview-container slot-preview" id="backPreviewContainer">
+                <div class="preview-content">
+                  <img id="backPreviewImg" class="preview-thumbnail" src="" alt="Back Info Panel Preview">
+                  <div class="preview-details">
+                    <div class="preview-filename" id="backPreviewFilename">back.jpg</div>
+                    <div class="preview-meta" id="backPreviewMeta">0.00 MB</div>
+                  </div>
+                  <button type="button" class="btn btn-secondary" id="backClearBtn" style="padding: 6px 12px; font-size: 0.78rem;">Remove</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- API Key Accordion (Optional local override) -->
+        <div class="api-key-box">
+          <label for="geminiKeyInput" style="font-size: 0.8rem; color: var(--text-secondary); white-space: nowrap;">
+            Gemini API Key:
+          </label>
+          <input type="password" id="geminiKeyInput"
+            placeholder="{% if has_api_key %}Configured in server environment (GEMINI_API_KEY / apikey.txt){% else %}Enter Gemini API Key (or use Sample Demos below){% endif %}">
+        </div>
+
+        <!-- Primary Action Buttons -->
+        <div class="action-buttons">
+          <button type="button" class="btn btn-primary" id="scanBtn" disabled>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            Scan Product & Generate Report
+          </button>
+        </div>
+
+        <!-- Instant Demo Presets -->
+        <div class="presets-section">
+          <div class="presets-title">Or Test Instantly with Calibrated Packaging Presets</div>
+          <div class="presets-grid">
+            <div class="preset-card preset-highlight-dual" data-preset="dual_panel_valid">
+              <div class="preset-badge-tag">Dual-Panel &bull; Coherent</div>
+              <div class="preset-name">Butter Cookies (Dual-Panel Front + Back)</div>
+              <div class="preset-desc">Front PDP + Back Info panel combined. Coherence Gatekeeper: 100% PASS.</div>
+            </div>
+            <div class="preset-card preset-highlight-mismatch" data-preset="dual_panel_mismatch">
+              <div class="preset-badge-tag tag-danger">Mismatch Shield Test</div>
+              <div class="preset-name">Cross-Product Mismatch Attack (Fraud Test)</div>
+              <div class="preset-desc">Front of Cookies + Back of Shampoo. Blocked with 422 Panel Mismatch!</div>
+            </div>
+            <div class="preset-card" data-preset="biscuit_compliant">
+              <div class="preset-name">Butter Cookies (Single Panel)</div>
+              <div class="preset-desc">100% Legal Metrology Pass + LOW Authenticity Risk (Corroborated brand).</div>
+            </div>
+            <div class="preset-card" data-preset="synthetic_fake">
+              <div class="preset-name">Too Yumms All In One (Fake Brand Test)</div>
+              <div class="preset-desc">Synthetic test: Nonexistent brand 'Too Yumms' &rarr; HIGH Authenticity Risk.</div>
+            </div>
+            <div class="preset-card" data-preset="mrp_anomaly">
+              <div class="preset-name">Too Yumm! All In One (MRP Anomaly Test)</div>
+              <div class="preset-desc">Genuine brand with abnormal price tag (₹999 vs ₹65) &rarr; Price Anomaly Risk.</div>
+            </div>
+            <div class="preset-card" data-preset="noodles_partial_review">
+              <div class="preset-name">Masala Noodles (Review Required)</div>
+              <div class="preset-desc">Ambiguous date stamp & partial address &rarr; Review Required.</div>
+            </div>
+            <div class="preset-card" data-preset="shampoo_non_compliant">
+              <div class="preset-name">Herbal Shampoo (Non-Compliant)</div>
+              <div class="preset-desc">Missing mandatory Net Quantity and Manufacturing Date &rarr; Deficient pack.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- =========================================================================
+         SCREEN 2: RESULTS & INSPECTION DASHBOARD
+         ========================================================================= -->
+    <main id="resultsContainer" class="results-container">
+
+      <!-- Dual Header Cards Layout -->
+      <section class="dual-score-grid">
+
+        <!-- CARD 1: Legal Metrology Compliance Screening -->
+        <div class="score-header-card">
+          <div class="score-main">
+            <div class="score-circle" id="scoreCircle">
+              <span class="score-value" id="reportScore">--%</span>
+              <span class="score-label">Screening</span>
+            </div>
+            <div class="score-title-area">
+              <h2>Legal Metrology Screening</h2>
+              <div class="score-meta">
+                Inspection ID: <span id="inspId" style="font-family: monospace; color:#93c5fd;">--</span> &bull;
+                Timestamp: <span id="inspTimestamp">--</span>
+              </div>
+              <div style="margin-top: 8px;">
+                <span id="reportStatus" class="status-pill">STATUS</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="score-stats-grid">
+            <div class="stat-box">
+              <div class="stat-num" id="passedCount" style="color: #34d399;">-</div>
+              <div class="stat-tag">Passed</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num" id="reviewCount" style="color: #fbbf24;">-</div>
+              <div class="stat-tag">Review</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num" id="failedCount" style="color: #f87171;">-</div>
+              <div class="stat-tag">Failed</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2: Authenticity Risk & Product Verification -->
+        <div class="score-header-card">
+          <div class="score-main">
+            <div class="score-circle score-circle-risk" id="riskScoreCircle">
+              <span class="score-value" id="riskScoreVal">--</span>
+              <span class="score-label">Risk Score</span>
+            </div>
+            <div class="score-title-area">
+              <h2>Authenticity Risk Assessment</h2>
+              <div class="score-meta" id="riskSummaryText">Evaluating web corroboration signals...</div>
+              <div style="margin-top: 8px;">
+                <span id="riskStatusPill" class="status-pill">RISK LEVEL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Authenticity Signals Summary -->
+          <div class="score-stats-grid" id="authSignalsListHeader"
+            style="display: flex; flex-direction: column; gap: 4px; border-top: 1px solid var(--border-color); padding-top: 10px;">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Results Navigation Tabs -->
+      <nav class="tabs-nav">
+        <button type="button" class="tab-btn active" data-tab="tabCompliance">
+          Legal Metrology Matrix
+        </button>
+        <button type="button" class="tab-btn" data-tab="tabAuthenticity">
+          Authenticity Risk & Web Evidence
+        </button>
+        <button type="button" class="tab-btn" id="tabBtnCoherence" data-tab="tabCoherence" style="display: none;">
+          Dual-Panel Coherence
+        </button>
+        <button type="button" class="tab-btn" data-tab="tabAlternate">
+          Market Alternatives
+        </button>
+        <button type="button" class="tab-btn" data-tab="tabNutrition">
+          Nutritional Details
+        </button>
+        <button type="button" class="tab-btn" data-tab="tabExtraction">
+          Extracted Declarations
+        </button>
+        <button type="button" class="tab-btn" data-tab="tabReadability">
+          Readability & Quality
+        </button>
+        <button type="button" class="tab-btn" data-tab="tabEvidence">
+          Visual Evidence & Interactive Zones
+        </button>
+        <button type="button" class="tab-btn" data-tab="tabDisclaimers">
+          Safety & Disclaimers
+        </button>
+      </nav>
+
+
+      <!-- Tab 1: Compliance Matrix Table -->
+      <section id="tabCompliance" class="tab-pane active">
+        <div class="table-card">
+          <table class="compliance-table">
+            <thead>
+              <tr>
+                <th style="width: 28%;">Legal Metrology Requirement</th>
+                <th style="width: 14%;">Status</th>
+                <th style="width: 28%;">Detected Value & Evidence</th>
+                <th style="width: 30%;">Statutory Reason & Expected</th>
+              </tr>
+            </thead>
+            <tbody id="complianceTableBody">
+              <!-- Dynamically rendered -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Tab 2: Authenticity Risk & Web Evidence -->
+      <section id="tabAuthenticity" class="tab-pane">
+        <div class="info-grid" id="authSignalsGrid">
+          <!-- Signal cards dynamically rendered -->
+        </div>
+
+        <!-- Reasons and Assessment List -->
+        <div class="info-card" style="margin-bottom: 20px;">
+          <div class="info-label" style="color:#38bdf8;">Authenticity Assessment & Signal Reasons</div>
+          <ul id="authReasonsList" style="padding-left: 20px; margin-top: 8px;">
+            <!-- Dynamically rendered -->
+          </ul>
+        </div>
+
+        <!-- Web Evidence Sources List -->
+        <div class="info-card">
+          <div class="info-label" style="color:#60a5fa;">Corroborating Web Evidence Sources</div>
+          <div id="webSourcesContainer" class="sources-list">
+            <!-- Dynamically rendered -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab: Dual-Panel Coherence Analysis -->
+      <section id="tabCoherence" class="tab-pane">
+        <div id="coherenceContainer" class="coherence-container">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+
+      <!-- Tab: Alternate Products -->
+      <section id="tabAlternate" class="tab-pane">
+        <div class="section-intro-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div>
+              <h3 style="margin:0; font-size:1.15rem; color:#38bdf8; display:flex; align-items:center; gap:8px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                Market Presence & Alternate Products
+              </h3>
+              <p style="margin:4px 0 0 0; font-size:0.84rem; color:var(--text-secondary);">
+                Verified commodity alternatives, competitor offerings, and healthier/economy choices available in the
+                Indian market.
+              </p>
+            </div>
+            <div id="alternatesCountBadge" class="status-pill status-pass" style="font-size:0.75rem;">
+              -- Alternatives Found
+            </div>
+          </div>
+        </div>
+
+        <div class="alternates-grid" id="alternatesGrid">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+
+      <!-- Tab: Nutritional Details -->
+      <section id="tabNutrition" class="tab-pane">
+        <div id="nutritionContainer" class="nutrition-container">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+
+      <!-- Tab 3: Extracted Product Information -->
+      <section id="tabExtraction" class="tab-pane">
+        <div class="info-grid" id="infoGrid">
+          <!-- Dynamically rendered -->
+        </div>
+      </section>
+
+      <!-- Tab 4: Readability & Image Quality -->
+      <section id="tabReadability" class="tab-pane">
+        <div class="readability-grid" id="readabilityGrid">
+          <!-- Dynamically rendered -->
+        </div>
+        <div class="disclaimer-card" id="fontDisclaimer">
+          Physical font size (in mm according to Table-I of LMR 2011) requires calibrated reference scale; displaying
+          pixel-level visual legibility.
+        </div>
+      </section>
+
+      <!-- Tab 5: Visual Evidence Viewer -->
+      <section id="tabEvidence" class="tab-pane">
+        <div class="evidence-split">
+          <div class="image-viewer-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <h3 style="font-size: 1rem; color: #94a3b8; margin: 0;">Packaging Image & Identified Zones</h3>
+              <label
+                style="font-size: 0.78rem; color: #93c5fd; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                <input type="checkbox" id="debugCoordsToggle"> Developer Debug Coords
+              </label>
+            </div>
+            <div class="image-stage" id="imageStage">
+              <div class="image-wrapper" id="imageWrapper">
+                <img id="evidenceProductImg" class="product-img" src="" alt="Packaged Commodity Evidence">
+                <div id="boundingOverlayContainer" class="annotation-overlay"></div>
+              </div>
+            </div>
+          </div>
+          <div class="image-viewer-card">
+            <h3 style="font-size: 1rem; margin-bottom: 12px; color: #94a3b8;">Declaration Evidence Snippets</h3>
+            <div class="evidence-list" id="evidenceList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Tab 6: Safety & Authenticity Disclaimers -->
+      <section id="tabDisclaimers" class="tab-pane">
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="info-label" style="color: #60a5fa;">Product Safety Intelligence (Phase 1 Scope)</div>
+            <div class="info-value" style="font-size: 0.9rem; line-height: 1.6;" id="safetyNote">
+              Safety indicators extracted from label declarations. A photograph cannot verify laboratory or chemical
+              safety.
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-label" style="color: #a78bfa;">Authenticity Risk Model Disclaimer</div>
+            <div class="info-value" style="font-size: 0.9rem; line-height: 1.6;" id="authNote">
+              LegalMetriX evaluates web corroboration signals and packaging consistency. It does NOT provide laboratory
+              certification or 100% legal counterfeit determination.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Actions Bar -->
+      <div class="action-buttons" style="margin-top: 36px; flex-wrap: wrap;">
+        <button type="button" class="btn btn-secondary" id="newScanBtn">
+          &larr; Scan Another Product
+        </button>
+        <button type="button" class="btn btn-primary" id="downloadPdfBtn">
+          Download Official PDF Report
+        </button>
+        <button type="button" class="btn btn-warning" id="generateNoticeBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:4px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          Generate Statutory Legal Notice / Seizure Memo
+        </button>
+        <button type="button" class="btn btn-secondary" id="printBtn">
+          Print Web Summary
+        </button>
+      </div>
+    </main>
+
+    <!-- Application Footer -->
+    <footer class="app-footer">
+      <div class="footer-nav-row" style="display: flex; justify-content: center; gap: 24px; margin-bottom: 10px; font-size: 0.82rem;">
+        <a href="/privacy" class="footer-link">Privacy Policy</a>
+        <span style="color: #475569;">&bull;</span>
+        <a href="/terms" class="footer-link">Terms &amp; Conditions</a>
+        <span style="color: #475569;">&bull;</span>
+        <a href="https://consumeraffairs.gov.in/pages/legal-metrology-act" target="_blank" rel="noopener noreferrer" class="footer-link">Legal Metrology Act, 2009</a>
+      </div>
+      <p>LegalMetriX &bull; Compliance Inspection &amp; Statutory Authenticity Verification System</p>
+      <p style="margin-top: 4px; font-size: 0.72rem; color: #64748b;">
+        Statutory Notice: LegalMetriX provides preliminary screening and structured report generation under the Legal Metrology (Packaged Commodities) Rules, 2011. Final enforcement and seizure memos require manual inspection by an authorized Legal Metrology Inspector.
+      </p>
+    </footer>
+  </div>
+
+  <!-- Automated Mismatch Prevention Modal -->
+  <div class="mismatch-modal-overlay" id="mismatchModalOverlay" style="display: none;">
+    <div class="mismatch-modal-card">
+      <div class="mismatch-header">
+        <div class="mismatch-icon">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </div>
+        <div>
+          <div class="mismatch-badge">GATEKEEPER REJECTION &bull; HTTP 422</div>
+          <h2 class="mismatch-title">Automated Cross-Panel Mismatch Blocked</h2>
+        </div>
+      </div>
+      <p class="mismatch-summary" id="mismatchSummary">
+        The uploaded Front PDP and Back Info Panel images belong to two conflicting products.
+      </p>
+      <div class="mismatch-score-bar">
+        <span class="mismatch-score-label">Cross-Panel Coherence: <strong id="mismatchScoreVal">0%</strong></span>
+        <span class="mismatch-status-pill">REJECTED / INCOMPATIBLE COMMODITIES</span>
+      </div>
+      <div class="mismatch-discrepancies-box">
+        <div class="mismatch-discrepancies-title">Detected Discrepancies & Conflict Reasons:</div>
+        <ul class="mismatch-discrepancies-list" id="mismatchDiscrepanciesList">
+          <!-- Populated dynamically -->
+        </ul>
+      </div>
+      <div class="mismatch-footer">
+        <div class="mismatch-security-note">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          Inspection aborted to prevent cross-product data contamination and fraudulent label pairing.
+        </div>
+        <button type="button" class="btn btn-secondary" id="mismatchCloseBtn">Dismiss & Upload Matching Panels</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live Camera Scanner Modal -->
+  <div class="camera-modal-overlay" id="cameraModalOverlay" style="display: none;">
+    <div class="camera-modal-card">
+      <div class="camera-modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="camera-icon-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+          </div>
+          <div>
+            <h3 class="camera-modal-title">Live Packaging Camera Scanner</h3>
+            <span class="camera-slot-target" id="cameraSlotTarget">Target: Single Panel</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <select id="cameraSourceSelect" class="camera-select" title="Switch Video Device"></select>
+          <button type="button" class="camera-close-x" id="cameraCloseXBtn">&times;</button>
+        </div>
+      </div>
+      <div class="camera-viewfinder-container">
+        <video id="cameraVideo" autoplay playsinline muted></video>
+        <canvas id="cameraCanvas" style="display: none;"></canvas>
+        <div class="camera-overlay-frame">
+          <div class="corner-bracket top-left"></div>
+          <div class="corner-bracket top-right"></div>
+          <div class="corner-bracket bottom-left"></div>
+          <div class="corner-bracket bottom-right"></div>
+          <div class="camera-center-guide">Align packaging label inside frame</div>
+        </div>
+      </div>
+      <div class="camera-modal-footer">
+        <button type="button" class="btn btn-secondary" id="cameraCancelBtn">Cancel</button>
+        <button type="button" class="btn btn-primary" id="cameraSnapBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+          Capture Label Photo
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statutory Show-Cause Notice & Seizure Memo Modal -->
+  <div class="notice-modal-overlay" id="noticeModalOverlay" style="display: none;">
+    <div class="notice-modal-card" id="printableNoticeArea">
+      <div class="notice-doc-header">
+        <div class="notice-gov-title">GOVERNMENT OF INDIA</div>
+        <div class="notice-dept-title">DEPARTMENT OF CONSUMER AFFAIRS &bull; LEGAL METROLOGY DIVISION</div>
+        <div class="notice-form-name">FORM OF SHOW-CAUSE NOTICE / SEIZURE MEMO</div>
+        <div class="notice-sublaw">Under Section 15 & 18 of the Legal Metrology Act, 2009 read with Rule 32 of LMR, 2011</div>
+      </div>
+
+      <div class="notice-meta-grid">
+        <div><strong>Notice Ref No:</strong> <span id="noticeRefNo">LMD/SZ/INSP-XXXXX/2026</span></div>
+        <div><strong>Date of Inspection:</strong> <span id="noticeDate">--</span></div>
+        <div><strong>Inspecting Authority:</strong> Enforcement Wing, Legal Metrology Dept.</div>
+        <div><strong>Jurisdiction:</strong> Field Inspection Unit &bull; Automated Screening Record</div>
+      </div>
+
+      <div class="notice-section-box">
+        <strong style="color: #94a3b8; font-size: 0.76rem;">TO (MANUFACTURER / PACKER / IMPORTER):</strong>
+        <div id="noticeAddressee" style="margin-top: 4px; font-weight: 600; color: #f8fafc; font-size: 0.95rem;">--</div>
+      </div>
+
+      <div class="notice-body-text">
+        <p><strong>SUBJECT:</strong> Notice for contravention of mandatory statutory provisions under the Legal Metrology (Packaged Commodities) Rules, 2011.</p>
+        <p>Whereas an official inspection of the pre-packaged commodity bearing product name <strong id="noticeProductName" style="color:#60a5fa;">--</strong> and brand <strong id="noticeBrand" style="color:#60a5fa;">--</strong> was conducted, preliminary visual and optical character examination revealed the following statutory contraventions:</p>
+      </div>
+
+      <div class="notice-violations-table-wrap">
+        <table class="notice-table">
+          <thead>
+            <tr>
+              <th style="width: 8%;">Sl.</th>
+              <th style="width: 28%;">Statutory Rule Clause</th>
+              <th style="width: 28%;">Mandatory Requirement</th>
+              <th style="width: 36%;">Observed Non-Compliance</th>
+            </tr>
+          </thead>
+          <tbody id="noticeViolationsBody">
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="notice-penalties-box">
+        <strong style="color: #fca5a5;">STATUTORY PENALTY & COMPOUNDING PROVISIONS:</strong>
+        <p style="margin: 4px 0 0 0; font-size: 0.82rem; line-height: 1.5; color: #cbd5e1;">
+          Under <strong>Section 36(1)</strong> of the Legal Metrology Act, 2009, whoever manufactures, packs, imports or sells any non-standard packaged commodity shall be punishable with fine up to <strong>₹25,000</strong> for the first offence, and up to <strong>₹50,000</strong> for second offence. You are hereby called upon to show cause within <strong>14 days</strong> why legal prosecution proceedings should not be initiated, or apply for compounding under <strong>Section 48</strong>.
+        </p>
+      </div>
+
+      <div class="notice-actions-footer">
+        <div style="font-size: 0.74rem; color: #94a3b8;">
+          * Automated legal draft generated by LegalMetriX based on verified visual inspection evidence.
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button type="button" class="btn btn-secondary" id="noticeCloseBtn">Close</button>
+          <button type="button" class="btn btn-secondary" id="noticeCopyBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:4px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            Copy Notice Text
+          </button>
+          <button type="button" class="btn btn-primary" id="noticePrintBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:4px;"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            Print Statutory Notice
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rulebook Navigator Modal -->
+  <div class="rulebook-modal-overlay" id="rulebookModalOverlay" style="display: none;">
+    <div class="rulebook-modal-card">
+      <div class="rulebook-header">
+        <div>
+          <div class="rulebook-badge">OFFICIAL REGULATORY HANDBOOK</div>
+          <h2 class="rulebook-title">Legal Metrology (Packaged Commodities) Rules, 2011</h2>
+          <div class="rulebook-sub">Complete statutory clauses, Table-I font sizes, and compounding rules</div>
+        </div>
+        <button type="button" class="rulebook-close-icon" id="rulebookCloseBtn">&times;</button>
+      </div>
+
+      <!-- Search & Category Filters -->
+      <div class="rulebook-filter-bar">
+        <input type="text" id="ruleSearchInput" class="rulebook-search" placeholder="Search rules by keyword (e.g. font size, net quantity, MRP, unit sale price, penalty)...">
+        <div class="rulebook-chips" id="ruleCategoryChips">
+          <button type="button" class="rule-chip active" data-category="all">All Clauses</button>
+          <button type="button" class="rule-chip" data-category="mandatory">Rule 6 Mandatory</button>
+          <button type="button" class="rule-chip" data-category="table1">Table-I Font Heights</button>
+          <button type="button" class="rule-chip" data-category="usp">Unit Sale Price</button>
+          <button type="button" class="rule-chip" data-category="penalties">Penalties (Sec 36)</button>
+        </div>
+      </div>
+
+      <!-- Interactive Table-I Font Calculator -->
+      <div class="table1-calc-box">
+        <div class="table1-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:4px;"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><path d="M8 10h.01"></path><path d="M12 10h.01"></path><path d="M16 10h.01"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path></svg>
+          Interactive Table-I Numeral Height Calculator
+        </div>
+        <div class="table1-grid">
+          <div>
+            <label for="calcPackWeight" style="font-size: 0.75rem; color: #94a3b8; display: block; margin-bottom: 4px;">
+              Package Net Content / Capacity:
+            </label>
+            <select id="calcPackWeight" class="rulebook-select">
+              <option value="50">Up to 50 g / 50 ml</option>
+              <option value="200" selected>50 g/ml to 200 g/ml</option>
+              <option value="1000">200 g/ml to 1 kg / 1 Litre</option>
+              <option value="5000">More than 1 kg / 1 Litre</option>
+            </select>
+          </div>
+          <div class="calc-result-box">
+            <span class="calc-label">Normal Case Print:</span>
+            <strong class="calc-val" id="calcNormalVal">2.0 mm minimum</strong>
+          </div>
+          <div class="calc-result-box">
+            <span class="calc-label">Blown / Moulded Surface:</span>
+            <strong class="calc-val" id="calcMouldedVal">4.0 mm minimum</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rules List Container -->
+      <div class="rules-list-scroll" id="rulesListContainer">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading & Step Progress Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-card">
+      <div class="spinner"></div>
+      <div class="loading-stage-text" id="loadingStageText">Preparing image...</div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progressBarFill"></div>
+      </div>
+      <div class="loading-subtext" id="loadingSubtext">Analyzing packaging declarations...</div>
+    </div>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+
+</html>

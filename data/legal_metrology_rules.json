@@ -1,0 +1,108 @@
+{
+  "ruleset_version": "2011.1",
+  "source_document": "The Legal Metrology (Packaged Commodities) Rules, 2011 (G.S.R. 202(E), Dept of Consumer Affairs)",
+  "rules": [
+    {
+      "id": "LM_MFR",
+      "field": "Manufacturer / Packer / Importer",
+      "rule_reference": "Rule 6(1)(a) & Rule 10, Legal Metrology (Packaged Commodities) Rules, 2011",
+      "description": "Name and complete address of the manufacturer, or packer, or importer (including city, state, and PIN code).",
+      "severity": "high",
+      "mandatory": true
+    },
+    {
+      "id": "LM_NAME",
+      "field": "Product Name / Generic Name",
+      "rule_reference": "Rule 6(1)(b), Legal Metrology (Packaged Commodities) Rules, 2011",
+      "description": "Common or generic name of the commodity contained in the package.",
+      "severity": "high",
+      "mandatory": true
+    },
+    {
+      "id": "LM_QTY",
+      "field": "Net Quantity",
+      "rule_reference": "Rule 6(1)(c) & Rules 11, 12, 13, Legal Metrology (Packaged Commodities) Rules, 2011",
+      "description": "Net quantity in standard unit of weight (g/kg), volume (ml/l), length (m/cm), or number (N/U). Words like 'when packed' or 'approx' are prohibited.",
+      "severity": "high",
+      "mandatory": true
+    },
+    {
+      "id": "LM_MRP",
+      "field": "Retail Sale Price (MRP)",
+      "rule_reference": "Rule 6(1)(e) & Rule 2(m), Legal Metrology (Packaged Commodities) Rules, 2011",
+      "description": "Maximum Retail Price in the format 'MRP Rs. ... / ₹ ... incl. of all taxes' or 'Maximum / Max. retail price Rs. ... inclusive of all taxes'.",
+      "severity": "high",
+      "mandatory": true
+    },
+    {
+      "id": "LM_DATE",
+      "field": "Month & Year of Manufacture / Packing / Import",
+      "rule_reference": "Rule 6(1)(d) & Rule 6(1) Explanation I, Legal Metrology (Packaged Commodities) Rules, 2011",
+      "description": "Month and year in which commodity is manufactured, pre-packed or imported expressed in words or numerals (MM/YYYY or Month Year).",
+      "severity": "high",
+      "mandatory": true
+    },
+    {
+      "id": "LM_CARE",
+      "field": "Consumer Care Details",
+      "rule_reference": "Rule 6(2), Legal Metrology (Packaged Commodities) Rules, 2011",
+      "description": "Name, address, telephone number, and email address of person/office to be contacted in case of consumer complaints.",
+      "severity": "medium",
+      "mandatory": true
+    },
+    {
+      "id": "LM_COO",
+      "field": "Country of Origin",
+      "rule_reference": "Rule 6(1)(a) & Rule 10(1) Proviso, Legal Metrology (Packaged Commodities) Rules, 2011",
+      "description": "Country of origin must be declared, especially for imported goods or commodities pre-packed in India with foreign origin.",
+      "severity": "medium",
+      "mandatory": false
+    },
+    {
+      "id": "LM_USP",
+      "field": "Unit Sale Price (USP)",
+      "rule_reference": "Rule 6(1)(e) Amendment, Legal Metrology (Packaged Commodities) Rules",
+      "description": "Unit sale price (e.g. ₹ per g / ml / piece / kg) mandatory for pre-packaged commodities where package contains more than 1 piece or net qty > 1g/1ml.",
+      "severity": "high",
+      "mandatory": true
+    },
+    {
+      "id": "LM_EXP",
+      "field": "Best Before / Expiry Date",
+      "rule_reference": "Rule 6(1)(d) Proviso & FSSA/Food/Cosmetics Rules, Legal Metrology Rules",
+      "description": "Expiry date or Best-Before period mandatory for perishable food, cosmetics, or therapeutic commodities.",
+      "severity": "medium",
+      "mandatory": false
+    },
+    {
+      "id": "LM_TABLE_I",
+      "field": "Minimum Height of Numerals (Table-I)",
+      "rule_reference": "Rule 7 & Table-I, Legal Metrology (Packaged Commodities) Rules, 2011",
+      "description": "Numerals and letters of net quantity declaration must meet minimum height requirements based on net weight or volume.",
+      "severity": "high",
+      "mandatory": true,
+      "table_data": [
+        {"net_capacity": "Up to 50 g / 50 ml", "normal_case_min_mm": 1.0, "blown_moulded_min_mm": 2.0},
+        {"net_capacity": "50 g/ml to 200 g/ml", "normal_case_min_mm": 2.0, "blown_moulded_min_mm": 4.0},
+        {"net_capacity": "200 g/ml to 1 kg/litre", "normal_case_min_mm": 4.0, "blown_moulded_min_mm": 6.0},
+        {"net_capacity": "More than 1 kg / 1 litre", "normal_case_min_mm": 6.0, "blown_moulded_min_mm": 6.0}
+      ]
+    },
+    {
+      "id": "LM_EXEMPT",
+      "field": "Exemptions from Rules (Rule 26)",
+      "rule_reference": "Rule 26, Legal Metrology (Packaged Commodities) Rules, 2011",
+      "description": "Exempts packages containing commodities net content 10g/10ml or less (except tobacco), packages containing fast food items packed by hotel/restaurant, and agricultural produce in packages > 50kg.",
+      "severity": "info",
+      "mandatory": false
+    },
+    {
+      "id": "LM_PENALTY",
+      "field": "Statutory Penalties (Section 36 & 48)",
+      "rule_reference": "Section 36 & 48, Legal Metrology Act, 2009",
+      "description": "Whoever manufactures, packs, imports or sells non-standard packages shall be punished: 1st Offence: Fine up to ₹25,000; 2nd Offence: Fine up to ₹50,000; Subsequent: Fine up to ₹1,00,000 or imprisonment up to 1 year or both.",
+      "severity": "critical",
+      "mandatory": true
+    }
+  ]
+}
