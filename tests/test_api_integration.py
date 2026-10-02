@@ -80,12 +80,12 @@ def test_demo_preset_non_compliant(client):
 
 def test_inspect_upload_validation(client):
     # Test uploading without file
-    response = client.post('/api/inspect', data={})
+    response = client.post('/api/inspect', data={}, headers={"X-Gemini-Key": "test_key"})
     assert response.status_code == 400
 
     # Test invalid file format
     response = client.post('/api/inspect', data={
         'image': (io.BytesIO(b"fake text data"), 'test.txt')
-    })
+    }, headers={"X-Gemini-Key": "test_key"})
     assert response.status_code == 400
     assert b"Unsupported file format" in response.data
